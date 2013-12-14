@@ -1,4 +1,4 @@
-template010
+template010 - master
 ===========
 simple text adventure game in javascript
 
