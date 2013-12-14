@@ -1,6 +1,13 @@
+
 template010 - master
 ===========
 simple text adventure game in javascript
+
+
+simple text adventure game in javascript
+
+with full CSS by [left23]
+
 
  This template is part of a the Dojogame resources . 
  For more info see: http://kata.coderdojo.com/wiki/dojogame
@@ -8,7 +15,7 @@ simple text adventure game in javascript
 
  http://techbot.github.io 2013
 
-====================================
+
 index.php
 <html>
     <head>
