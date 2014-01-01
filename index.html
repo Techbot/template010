@@ -1,145 +1,86 @@
 <html>
     <head>
-	
-	<style>
-	
-	body {font-family:arial;background:#111111;font-size:18px;}
-	p {margin:1em 0;}
-	h1, h2, h3 {font-family: 'Luckiest Guy', cursive;text-shadow:1px 1px 1px white;text-align:center;}
-	code {font-family: monospace;color:green;padding:1em;background:black;display:block;margin:1em 0;text-align:center;}
-	#container,
-	#input_form {width : 598px; margin: 0 auto; background:rgba(255,255,255,0.6);padding:1em;}
-	#container {margin-top:2em;}
-	
-	input {
-		background: #ffffff; /* Old browsers */
-		background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
-		color:black;
-		border-top:2px solid #333333;
-		border-right:2px solid #333333;
-		border-bottom:2px solid #222222;
-		border-left:2px solid #111111;
-		padding:1em 2em;
-		border-radius:15px;
-		margin:0 0 0 0.5em;
-		text-shadow:1px 1px 1px white;
-	}
-	input[type=button] {
-		background: #d8e0de; /* Old browsers */
-		background: linear-gradient(to bottom,  #d8e0de 0%,#aebfbc 33%,#99afab 66%,#8ea6a2 100%,#829d98); 
-		color:black;
-		font-weight:bold;
-		border-top:2px solid #333333;
-		border-right:2px solid #333333;
-		border-bottom:2px solid #222222;
-		border-left:2px solid #111111;
-		text-transform:uppercase;
-		font-family: 'Luckiest Guy', cursive;
-		font-size:24px;
-		padding:0.5em 1em;
-	}
-	input[type=button]:hover {
-		box-shadow:0 0 3px 3px rgba(0,0,0,0.6);
-	}
-								   
-	</style>
-	
-	<link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
-	
+    <link rel=stylesheet href='style.css'>
+    <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
     <script>
-    
-	
-
-    var message = [];
-    var gameForm =  ' Your Input:<input type="text" id="answer"> <input type ="button" id ="enter" onclick="yourMove()" value = "enter">';
-    var stage = 1;
-    var number = 1;
-	
-	
-function stuff(){
-
-   //stage 1
-    message[1] = "<h2>Do you want to play a game?</h2>";
-	
-    //stage 2
-    message[2] = "<p>You are sitting in front of a computer. On the screen a cursor text blinks, and in the centre glows a skull and crossbones.</p><code>Do you know the password?<br><img src='skull.gif'><br></code></p>";
-    message[3] = "<code><p>That is not the password.</p><p>Do you know the password?</p></code>";
-    
-  //stage 3    
-    message[4] = "<p>Computer code scrolls down the screen. The light fills the message with a dull, green, swamp-like glow. Four more terminals jump into action. You are in. </p> <p>You will need help. You can call Jack and Maeve, the hackers, or Kate and David, the cyper-coders. Jack can only be contacted via IRC and will take a few hours. He's less likely to be detected but could take hours.</p><p>Kate specialises in encryption but she is more likely to be watched by the enemy.</p><p> Type IRC or email to continue.</p>";
-    
-    //stage4
-  
-    message[5] = "<h2>You chose the hackers.</h2><p>You will need to access the mainframe, by creating a madelbrot virus programme.</p>";
-    message[6] = "<h2>You choose the coders.</h2><p>You will need to decript the Central Firewall System.</p>";
-    
-  //
-
-    var respond = document.getElementById("container");  
-    var input = document.getElementById("input_form"); 
-    respond.innerHTML = message[1];
-    input.innerHTML = gameForm;
-    
-}  
-
-function yourMove()
-{
-    
-        respond = document.getElementById("container");  
-        input = document.getElementById("input_form"); 
-        answer = document.getElementById("answer").value;
-
-///////////////////////////////////////////////
-
-		if (stage == 2  && answer == "yes")	{
-			number = 3;
-			stage = 2;
-		}
-
-
-        if (stage == 1 && answer == "yes")
-        { 
-            number = 2;
-            stage = 2;
-            
-        }
-        else if ( stage == 1 && answer == "no"){
-        
-            number = 1;
-        
-        }
-/////////////////////////////////////////////////////////////////////
-       if (stage == 2  && answer == "no") 
+        var message = [];
+        var gameForm =  ' Your Input:<input type="text" id="answer"> <input type ="button" id ="enter" onclick="yourMove()" value = "enter">';
+        var stage = 1;
+        var number = 1;
+	    var irc_complete = false;
+	    var email_complete = false;
+	    var ftp_complete = false;
+	    var complete = false;
+	    var attempts = 9;
+	    var message={};	    
+	    var http_message; 
+    </script>  
+    <script src='messages.js'></script>
+	<script src='stages.js'></script>	    
+    <script>      
+        function stuff()
         {
-            number = 4;
-            stage  = 3;
-            
+            var output = document.getElementById("container");  
+            var input = document.getElementById("input_form");
+            var http = document.getElementById("http");
+            define_messages();
+            output.innerHTML = message[1];
+            input.innerHTML = gameForm;
+         }  
+        function yourMove()
+        {
+            output = document.getElementById("container");  
+            input = document.getElementById("input_form"); 
+            answer = document.getElementById("answer").value;
+            // After each stage is configured print to screen ////
+            define_stages();
+            define_messages();
+            output.innerHTML = message[number];
+            input.innerHTML= gameForm;
+            if (stage > 1)
+            {
+                http.innerHTML = completed();
+            }
+        } //End of yourMove function
+ ////////////////////////////////////////////////////////////////
+//     Additional function to display the % of goal(ip address) complete
+////////////////////////////////////////////////////////////////
+    function completed()
+    {
+        http_message = "http://46.";
+        
+        if (email_complete == true)
+        {
+            http_message = http_message + "19.";
         }
-
-        if (stage == 3 && answer == "IRC") 
-		{
-            stage   = 4;
-            number  = 5;
-  
-		}
-      
-		if (stage == 3 && answer == "email")
-		{
-            stage  = 4;
-            number = 6;
-		}
-   
-     respond.innerHTML = message[number];
-     input.innerHTML= gameForm;
-}
-  
+        else 
+        {
+            http_message = http_message + "__.";
+        };
+        if (irc_complete == true){
+            http_message = http_message + "37.";
+            }
+        else 
+        {
+            http_message = http_message + "__.";
+        };
+        if (ftp_complete == true)
+        {
+            http_message = http_message + "66";
+        }
+        else 
+        {
+        http_message = http_message + "__";
+        };
+        return http_message;
+    }
     </script> 
- 
-    </head>
+</head>
     <body onload = "stuff()">
 
         <div id = "container"></div>
         <div id = "input_form"></div>
+        <div id = "http"></div>        
 
     </body>
 </html>
