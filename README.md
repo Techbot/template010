@@ -27,9 +27,9 @@ index.php
     var stage = 1;
     var number = 1;
         
-function stuff(){
+    function stuff(){
 
-   //stage 1
+    //stage 1
     message[1] = "Do you want to play a game?";
     //stage 2
     message[2] = " You are sitting in front of a computer On the screen a cursor blinks: 'Do you know tha password?' glows in the centre beneath a skull and crossbones";
@@ -43,7 +43,7 @@ function stuff(){
     message[5] = "You chose the hackers. You will need to access the mainframe, by creating a madelbrot virus programe.";
     message[6] = "You choose the coders. You will ned to decript the Central Firewall System.";
     
-  // Setup everything and write the first message
+// Setup everything and write the first message
 
     var respond = document.getElementById("container");
     var input = document.getElementById("input_form");
@@ -55,8 +55,8 @@ function stuff(){
 // This might be considered the engine of the game, it reads the context of the tex element and depeding on the 'stage' of the game, it writes the correct response to the div. Amore sophisticated engine for this text input  might be made alongside a sweries of other "state machines".
 
 
-function yourMove()
-{
+    function yourMove()
+    {
     
         respond = document.getElementById("container");
         input = document.getElementById("input_form");

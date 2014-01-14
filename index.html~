@@ -15,7 +15,7 @@
 	    var message={};	    
 	    var http_message; 
     </script>  
-    <script src='messages.js'></script> 
+    <script src='messages.js'></script>
 	<script src='stages.js'></script>	    
     <script>      
         function stuff()
@@ -33,14 +33,9 @@
             input = document.getElementById("input_form"); 
             
             answer = document.getElementById("answer").value;
-         
+            // After each stage is configured print to screen ////
             define_stages();
             define_messages();// messages needs to be redifined each time because one of the messages is dynamic. Can you think of a better way?
-           
-           
-           
-           
-            // After each stage is configured print to screen ////
             output.innerHTML = message[number];
             input.innerHTML= gameForm;
             if (stage > 1)
